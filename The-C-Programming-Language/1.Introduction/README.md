@@ -243,9 +243,30 @@ int remove_blank(char line[], int len) {
 }
 ```
 
+Or a better way is avoiding user to provide the length information. We can control it by ourselves.
+
 ## Exercise 1-19
 
 > Write a function reverse(s) that reverses the character string s. Use it to write a program that reverses its input a line at a time.
+
+Here, we can reverse the character string ```s``` in-place.
+
+```
+void swap(char line[], int i, int j) {
+	char tmp = line[i];
+	line[i] = line[j];
+	line[j] = tmp;
+}
+
+void reverse(char line[], int len) {
+	if (len <= 1) return;
+	int i, j;
+	for (i = 0, j = len - 1; i < j; i++, j--) {
+		swap(line, i, j);
+	}
+	return;
+}
+```
 
 ## Exercise 1-20
 
