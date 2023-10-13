@@ -272,6 +272,40 @@ void reverse(char line[], int len) {
 
 > Write a program detab that replaces tabs in the input with the proper number of blanks to space to the next tab stop. Assume a fixed set of tab stops, say every n columns. Should n be a variable or a symbolic parameter?
 
+```n``` should be a symbolic parameter, it can be determined when compilation time.
+
+But another question is:
+
+Should we change the original character array or create another array to store the detabed string?
+
+If we want to do it in-place, once we encounter a ```'\t'```, we need to move all the elements behind the ```'\t'```.
+
+And in the function programing paradigm, it suggests us all of the objects should be immutable. We should not change the original contents when we design the function.
+
+Therefore, I will design the function like:
+
+```
+char* detab(char line[]) {
+	char* p = malloc(sizeof(char) * MAXLINE);
+	int i = 0, j = 0;
+	while (line[i] != '\0') {
+		if (line[i] == '\t') {
+			int k;
+			for (k = 0; k < DETAB; k++) {
+				p[j++] = ' ';
+			}
+		}
+		else {
+			p[j++] = line[i];
+		}
+		i++;
+	}
+	p[j] = '\0';
+	return p;
+}
+```
+
+Use two pointers to keep track of the elements in two arrays.
 
 ## Exercise 1-21
 
