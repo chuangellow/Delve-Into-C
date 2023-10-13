@@ -213,6 +213,36 @@ Therefore, we can return the length of the line to the caller as an indicator.
 
 > Write a program to remove trailing blanks and tabs from each line of input, and to delete entirely blank lines.
 
+Here we can implement the following function:
+
+```
+int remove_blank(char line[], int len) {
+	int i;
+	for (i = len - 2; i >= 0 && line[i] == ' '; i--) {
+		line[i] = '\0';
+	}
+	return i+1;
+}
+```
+
+However, the function is dependent on whether the argument ```len``` counts the last ```\0```.
+
+It's not a good implementation. We can revise this into:
+
+```
+int remove_blank(char line[], int len) {
+	int last_pos = len - 1;
+	while (last_pos >= 0 && line[last_pos] == '\0') {
+		last_pos--;
+	}
+	int i;
+	for (i = last_pos; i >= 0 && line[i] == ' '; i--) {
+		line[i] = '\0';
+	}
+	return i+1;
+}
+```
+
 ## Exercise 1-19
 
 > Write a function reverse(s) that reverses the character string s. Use it to write a program that reverses its input a line at a time.
