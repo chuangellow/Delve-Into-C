@@ -31,12 +31,29 @@ int remove_blank(char line[], int len) {
 	return i+1;
 }
 
+void swap(char line[], int i, int j) {
+	char tmp = line[i];
+	line[i] = line[j];
+	line[j] = tmp;
+}
+
+void reverse(char line[], int len) {
+	if (len <= 1) return;
+	int i, j;
+	for (i = 0, j = len - 1; i < j; i++, j--) {
+		swap(line, i, j);
+	}
+	return;
+}
+
 int main(void) {
 	int len;
 	char line[MAXLINE];
 	while ((len = get_line(line, MAXLINE)) > 0) {
 		len = remove_blank(line, len);
 		if (len > 0) {
+			printf("%s\n", line);
+			reverse(line, len);
 			printf("%s\n", line);
 		}
 	}
