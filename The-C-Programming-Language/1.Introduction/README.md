@@ -311,6 +311,32 @@ Use two pointers to keep track of the elements in two arrays.
 
 > Write a program entab that replaces strings of blanks by the minimum number of tabs and blanks to achieve the same spacing. Use the same tab stops as for detab. When either a tab or a single blank would suffice to reach a tab stop, which should be given preference?
 
+We can also use the two-pointers method to write the entab function.
+
+```
+char* entab(char line[]) {
+	char *p = (char*)malloc(sizeof(char) * MAXLINE);
+	int i = 0, j = 0;
+	while (line[i] != '\0') {
+		if (line[i] == ' ') {
+			while (line[i] == ' ') {
+				i++;
+			}
+			p[j++] = '\t';
+		}
+		else {
+			p[j++] = line[i++];
+		}
+	}
+	p[j] = '\0';
+	return p;
+}
+```
+
+The entab function will replace the consecutive spacing into a tab.
+
+We can combine the entab and the detab function to make the spacing into a default number of blanks.
+
 ## Exercise 1-22
 
 > Write a program to ``fold'' long input lines into two or more shorter lines after the last non-blank character that occurs before the n-th column of input. Make sure your program does something intelligent with very long lines, and if there are no blanks or tabs before the specified column.
